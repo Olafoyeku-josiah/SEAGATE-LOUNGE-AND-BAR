@@ -3,20 +3,23 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center rounded-full border px-3 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {
     variants: {
       variant: {
         default:
-          "border-blue-500/30 bg-blue-500/10 text-blue-400 hover:bg-blue-500/20",
+          "border-slate-300 bg-slate-100 text-slate-800 hover:bg-slate-200",
+        gold: "border-slate-300 bg-slate-100 text-slate-800 hover:bg-slate-200",
+        emerald:
+          "border-slate-300 bg-slate-100 text-slate-800 hover:bg-slate-200",
         secondary:
-          "border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700",
+          "border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200",
         destructive:
-          "border-rose-500/30 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20",
-        outline: "text-slate-300 border-slate-700",
+          "border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100",
+        outline: "text-slate-700 border-slate-300 bg-white",
         gradient:
-          "border-indigo-500/40 bg-gradient-to-r from-blue-500/20 via-indigo-500/20 to-purple-500/20 text-indigo-300 shadow-sm",
-        glow: "border-cyan-500/40 bg-cyan-500/10 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.25)]",
+          "border-slate-300 bg-slate-100 text-slate-800 shadow-sm",
+        glow: "border-slate-300 bg-slate-100 text-slate-800 shadow-sm",
       },
     },
     defaultVariants: {

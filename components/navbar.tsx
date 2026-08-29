@@ -2,59 +2,99 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ContactDialog } from "@/components/contact-dialog";
-import { ShieldCheck, Menu, X, Sparkles } from "lucide-react";
+import { Phone, MapPin, Menu, X, Calendar, ShoppingBag } from "lucide-react";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-800/80 glass">
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-md shadow-sm">
+      {/* Top Banner Bar */}
+      <div className="bg-slate-100 px-4 py-1.5 text-xs text-slate-700 border-b border-slate-200">
+        <div className="mx-auto flex max-w-7xl items-center justify-between">
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1.5 text-slate-800 font-semibold">
+              <MapPin className="h-3.5 w-3.5 text-slate-600 shrink-0" />
+              Adebowale, Ondo Road, Akure
+            </span>
+            <span className="hidden md:inline-block text-slate-400">|</span>
+            <span className="hidden md:inline-block text-slate-700 font-medium">
+              Open Daily: 12 PM Till Late
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4 font-bold">
+            <a
+              href="tel:+2347047784064"
+              className="flex items-center gap-1 hover:text-slate-950 transition-colors text-slate-800"
+            >
+              <Phone className="h-3.5 w-3.5 text-slate-600" /> +234 704 778 4064
+            </a>
+            <span className="hidden sm:inline-block text-slate-400">/</span>
+            <a
+              href="tel:+2347061280261"
+              className="hidden sm:flex items-center gap-1 hover:text-slate-950 transition-colors text-slate-800"
+            >
+              +234 706 128 0261
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Navbar */}
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-purple-600 p-0.5 shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-all duration-300">
-            <div className="h-full w-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-              <ShieldCheck className="h-5 w-5 text-blue-400" />
-            </div>
+          <div className="h-11 w-11 rounded-2xl bg-slate-900 p-2 shadow-md group-hover:bg-slate-800 transition-all duration-300 flex items-center justify-center">
+            <Image
+              src="/letter-s.png"
+              alt="Seagate Lounge Logo"
+              width={28}
+              height={28}
+              className="h-7 w-7 object-contain grayscale contrast-125 brightness-125"
+            />
           </div>
           <div className="flex flex-col">
-            <span className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-              Seagate <span className="gradient-primary-heading">Lounge</span>
+            <span className="text-2xl font-black tracking-tight text-slate-900 font-serif">
+              SEAGATE
             </span>
-            <span className="text-[10px] font-medium tracking-widest text-slate-400 uppercase">
-              Enterprise Solutions
+            <span className="text-[11px] font-bold tracking-[0.25em] text-slate-600 uppercase">
+              LOUNGE & BAR
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-          <Link href="#solutions" className="hover:text-white transition-colors">
-            Solutions
-          </Link>
-          <Link href="#services" className="hover:text-white transition-colors">
-            Services
-          </Link>
-          <Link href="#showcase" className="hover:text-white transition-colors">
-            Showcase
-          </Link>
-          <Link href="#about" className="hover:text-white transition-colors">
+        <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-slate-700">
+          <Link href="#about" className="hover:text-slate-950 transition-colors">
             About Us
+          </Link>
+          <Link href="#amenities" className="hover:text-slate-950 transition-colors">
+            Amenities & Bar
+          </Link>
+          <Link href="#venue" className="hover:text-slate-950 transition-colors">
+            Event Venue
+          </Link>
+          <Link href="#fiesta" className="hover:text-slate-950 transition-colors flex items-center gap-1 text-slate-900">
+            <Calendar className="h-4 w-4 text-slate-600" /> Back To School
+          </Link>
+          <Link href="#delivery" className="hover:text-slate-950 transition-colors flex items-center gap-1">
+            <ShoppingBag className="h-4 w-4 text-slate-600" /> Delivery
+          </Link>
+          <Link href="#gallery" className="hover:text-slate-950 transition-colors">
+            Gallery
           </Link>
         </nav>
 
-        {/* Action CTA */}
-        <div className="hidden md:flex items-center gap-4">
-          <Badge variant="glow" className="hidden lg:inline-flex gap-1.5 py-1">
-            <Sparkles className="h-3.5 w-3.5 text-cyan-400" /> Executive Access
-          </Badge>
-
+        {/* Action CTAs */}
+        <div className="hidden lg:flex items-center gap-3">
           <ContactDialog>
-            <Button variant="gradient" size="default">
-              Get Started
+            <Button variant="default" size="default">
+              Book Venue / Table
             </Button>
           </ContactDialog>
         </div>
@@ -62,52 +102,77 @@ export function Navbar() {
         {/* Mobile menu toggle */}
         <button
           type="button"
-          className="md:hidden p-2 text-slate-400 hover:text-white"
+          className="lg:hidden p-2 text-slate-800 hover:text-slate-950"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {mobileMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
         </button>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-800 bg-slate-950/95 px-6 py-6 space-y-4 animate-in slide-in-from-top-5">
-          <nav className="flex flex-col space-y-3 text-base font-medium text-slate-300">
-            <Link
-              href="#solutions"
-              onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-white py-1"
-            >
-              Solutions
-            </Link>
-            <Link
-              href="#services"
-              onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-white py-1"
-            >
-              Services
-            </Link>
-            <Link
-              href="#showcase"
-              onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-white py-1"
-            >
-              Showcase
-            </Link>
+        <div className="lg:hidden border-b border-slate-200 bg-white/98 px-6 py-6 space-y-4 animate-in slide-in-from-top-5 shadow-lg">
+          <nav className="flex flex-col space-y-4 text-base font-semibold text-slate-800">
             <Link
               href="#about"
               onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-white py-1"
+              className="hover:text-slate-950 py-1"
             >
               About Us
             </Link>
+            <Link
+              href="#amenities"
+              onClick={() => setMobileMenuOpen(false)}
+              className="hover:text-slate-950 py-1"
+            >
+              Amenities & Bar
+            </Link>
+            <Link
+              href="#venue"
+              onClick={() => setMobileMenuOpen(false)}
+              className="hover:text-slate-950 py-1"
+            >
+              Event Venue (Outdoor & Indoor)
+            </Link>
+            <Link
+              href="#fiesta"
+              onClick={() => setMobileMenuOpen(false)}
+              className="hover:text-slate-950 py-1"
+            >
+              Back To School Fiesta (Sept 5)
+            </Link>
+            <Link
+              href="#delivery"
+              onClick={() => setMobileMenuOpen(false)}
+              className="hover:text-slate-950 py-1"
+            >
+              Home Delivery Available
+            </Link>
+            <Link
+              href="#gallery"
+              onClick={() => setMobileMenuOpen(false)}
+              className="hover:text-slate-950 py-1"
+            >
+              Photo Gallery
+            </Link>
           </nav>
-          <div className="pt-2">
+
+          <div className="pt-2 flex flex-col gap-3">
             <ContactDialog>
-              <Button variant="gradient" className="w-full">
-                Get Started
+              <Button variant="default" className="w-full">
+                Book Venue / Table
               </Button>
             </ContactDialog>
+            <a
+              href="https://wa.me/2347047784064"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full"
+            >
+              <Button variant="outline" className="w-full">
+                Order via WhatsApp
+              </Button>
+            </a>
           </div>
         </div>
       )}

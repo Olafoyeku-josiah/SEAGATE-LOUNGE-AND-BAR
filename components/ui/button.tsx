@@ -4,27 +4,30 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] cursor-pointer shadow-sm",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-lg shadow-blue-500/20 hover:bg-blue-600 hover:shadow-blue-500/30",
-        destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
-        outline:
-          "border border-slate-700/60 bg-slate-900/40 hover:bg-slate-800 hover:text-white text-slate-200 backdrop-blur-sm",
-        secondary:
-          "bg-slate-800 text-slate-100 hover:bg-slate-700/80 shadow-sm",
-        ghost: "hover:bg-slate-800/60 hover:text-slate-100 text-slate-300",
-        link: "text-blue-400 underline-offset-4 hover:underline",
+          "bg-slate-900 text-white font-bold hover:bg-slate-800 hover:shadow-md border border-slate-900/10",
+        gold: "bg-slate-900 text-white font-bold hover:bg-slate-800 hover:shadow-md border border-slate-900/10",
+        emerald:
+          "bg-slate-800 text-white font-bold hover:bg-slate-900 hover:shadow-md border border-slate-800/10",
         gradient:
-          "bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/25 hover:opacity-95 hover:shadow-indigo-500/40 border-0",
+          "bg-slate-900 text-white font-bold hover:bg-slate-800 hover:shadow-md border border-slate-900/10",
+        destructive:
+          "bg-rose-600 text-white hover:bg-rose-700",
+        outline:
+          "border border-slate-300 bg-white text-slate-800 hover:bg-slate-100 hover:text-slate-950 font-medium",
+        secondary:
+          "bg-slate-200/80 text-slate-900 hover:bg-slate-300/80 font-medium",
+        ghost: "hover:bg-slate-200/60 text-slate-700 hover:text-slate-950 font-medium",
+        link: "text-slate-900 underline-offset-4 hover:underline font-semibold",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-12 rounded-xl px-6 text-base font-semibold",
+        default: "h-11 px-5 py-2.5",
+        sm: "h-9 rounded-lg px-3.5 text-xs",
+        lg: "h-13 rounded-2xl px-7 text-base font-bold tracking-wide",
         icon: "h-10 w-10",
       },
     },

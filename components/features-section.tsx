@@ -99,7 +99,7 @@ export function FeaturesSection() {
                 </div>
                 <CardHeader className="space-y-4 pt-6">
                   <div
-                    className={`h-12 w-12 rounded-xl bg-gradient-to-br ${feature.accent} flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform duration-300`}
+                    className={`h-12 w-12 rounded-xl bg-linear-to-br ${feature.accent} flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform duration-300`}
                   >
                     <Icon className="h-6 w-6" />
                   </div>
