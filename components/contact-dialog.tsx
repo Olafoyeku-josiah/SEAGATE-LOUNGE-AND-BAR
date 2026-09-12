@@ -23,6 +23,7 @@ export function ContactDialog({ children }: { children?: React.ReactNode }) {
     reservationType: "Table Reservation (Hangout / Drinks)",
     fullName: "",
     phone: "",
+    email: "",
     date: "",
     notes: "",
   });
@@ -34,6 +35,19 @@ export function ContactDialog({ children }: { children?: React.ReactNode }) {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const resetForm = () => {
+    setFormData({
+      reservationType: "Table Reservation (Hangout / Drinks)",
+      fullName: "",
+      phone: "",
+      email: "",
+      date: "",
+      notes: "",
+    });
+    setSubmitted(false);
+    setErrorMsg(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -57,6 +71,16 @@ export function ContactDialog({ children }: { children?: React.ReactNode }) {
       }
 
       setSubmitted(true);
+      // Store phone for display in confirmation message then clear form inputs
+      const userPhone = formData.phone;
+      setFormData({
+        reservationType: "Table Reservation (Hangout / Drinks)",
+        fullName: "",
+        phone: userPhone,
+        email: "",
+        date: "",
+        notes: "",
+      });
     } catch (err: any) {
       console.error("Booking submit error:", err);
       // Even if API network fails locally, fallback gracefully to confirmation
@@ -67,11 +91,11 @@ export function ContactDialog({ children }: { children?: React.ReactNode }) {
   };
 
   return (
-    <Dialog onOpenChange={(open) => !open && setSubmitted(false)}>
+    <Dialog onOpenChange={(open) => !open && resetForm()}>
       <DialogTrigger asChild>
         {children || <Button variant="default">Book Table / Event</Button>}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md bg-white border-slate-200 text-slate-900">
+      <DialogContent className="sm:max-w-md bg-white border-slate-200 text-slate-900 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl font-black text-slate-900 font-serif flex items-center gap-2">
             <div className="h-8 w-8 rounded-xl bg-slate-900 p-1 flex items-center justify-center">
@@ -102,16 +126,7 @@ export function ContactDialog({ children }: { children?: React.ReactNode }) {
             <Button
               className="mt-4"
               variant="outline"
-              onClick={() => {
-                setSubmitted(false);
-                setFormData({
-                  reservationType: "Table Reservation (Hangout / Drinks)",
-                  fullName: "",
-                  phone: "",
-                  date: "",
-                  notes: "",
-                });
-              }}
+              onClick={resetForm}
             >
               Make Another Request
             </Button>
@@ -148,6 +163,18 @@ export function ContactDialog({ children }: { children?: React.ReactNode }) {
                 value={formData.fullName}
                 onChange={handleChange}
                 placeholder="e.g. Samuel Adebayo"
+                required
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-800">Email Address</label>
+              <Input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="e.g. samuel@example.com"
                 required
               />
             </div>

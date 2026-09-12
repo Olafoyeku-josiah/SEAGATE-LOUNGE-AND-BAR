@@ -3,31 +3,21 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { fullName, phone, date, reservationType, notes } = body;
+    const { fullName, phone, email, date, reservationType, notes } = body;
 
-    if (!fullName || !phone || !date) {
+    if (!fullName || !phone || !email || !date) {
       return NextResponse.json(
-        { error: "Missing required fields: fullName, phone, and date are required." },
+        { error: "Missing required fields: fullName, phone, email, and date are required." },
         { status: 400 }
       )
     }
 
     const resendApiKey = process.env.RESEND_API_KEY;
-    const destinationEmail = process.env.RESERVATION_NOTIFICATION_EMAIL || "seagateloungeakure@gmail.com";
+    const destinationEmail = process.env.RESERVATION_NOTIFICATION_EMAIL || "tayoadesoji@gmail.com";
 
     // If Resend API key is provided and not a placeholder, send real email via Resend
     if (resendApiKey && !resendApiKey.includes("your_api_key_here")) {
-      const emailRes = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${resendApiKey}`,
-        },
-        body: JSON.stringify({
-          from: "Seagate Lounge Reservations <onboarding@resend.dev>",
-          to: [destinationEmail],
-          subject: `🥂 New Booking Request: ${reservationType || "Reservation"} - ${fullName}`,
-          html: `
+      const ownerEmailHtml = `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; rounded: 12px; background-color: #ffffff;">
               <h2 style="color: #0f172a; margin-bottom: 4px;">SEAGATE LOUNGE & BAR</h2>
               <p style="color: #64748b; font-size: 14px; margin-top: 0;">Adebowale, Ondo Road, Akure</p>
@@ -38,6 +28,10 @@ export async function POST(req: NextRequest) {
                 <tr>
                   <td style="padding: 8px 0; color: #64748b; font-weight: bold; width: 140px;">Customer Name:</td>
                   <td style="padding: 8px 0; color: #0f172a;">${fullName}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #64748b; font-weight: bold;">Email:</td>
+                  <td style="padding: 8px 0; color: #0f172a;"><a href="mailto:${email}">${email}</a></td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #64748b; font-weight: bold;">Phone / WhatsApp:</td>
@@ -64,17 +58,33 @@ export async function POST(req: NextRequest) {
                 </p>
               </div>
             </div>
-          `,
-        }),
-      });
+          `;
 
-      if (!emailRes.ok) {
-        const errData = await emailRes.json();
+      const sendEmail = async (to: string, subject: string, html: string) => {
+        return fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${resendApiKey}`,
+          },
+          body: JSON.stringify({
+            from: "Seagate Lounge Reservations <onboarding@resend.dev>",
+            to: [to],
+            subject,
+            html,
+          }),
+        });
+      };
+
+      const ownerRes = await sendEmail(
+        destinationEmail,
+        `🥂 New Booking Request: ${reservationType || "Reservation"} - ${fullName}`,
+        ownerEmailHtml
+      );
+
+      if (!ownerRes.ok) {
+        const errData = await ownerRes.json();
         console.error("Resend API error:", errData);
-        return NextResponse.json(
-          { error: "Failed to dispatch email notification.", details: errData },
-          { status: 500 }
-        );
       }
     }
 

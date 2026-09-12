@@ -68,29 +68,29 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-sm text-slate-600">
               <li>
-                <a href="#about" className="hover:text-slate-950 transition-colors">
+                <Link href="/#about" className="hover:text-slate-950 transition-colors">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#amenities" className="hover:text-slate-950 transition-colors">
+                <Link href="/#amenities" className="hover:text-slate-950 transition-colors">
                   Amenities & Bar
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#venue" className="hover:text-slate-950 transition-colors">
+                <Link href="/#venue" className="hover:text-slate-950 transition-colors">
                   Event Venue Hosting
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#fiesta" className="hover:text-slate-950 transition-colors text-slate-900 font-bold">
-                  Back To School Fiesta
-                </a>
+                <Link href="/events" className="hover:text-slate-950 transition-colors">
+                  Past Events Gallery
+                </Link>
               </li>
               <li>
-                <a href="#gallery" className="hover:text-slate-950 transition-colors">
-                  Photo Gallery
-                </a>
+                <Link href="/gallery" className="hover:text-slate-950 transition-colors text-slate-900 font-bold">
+                  Photo & Video Gallery
+                </Link>
               </li>
             </ul>
           </div>

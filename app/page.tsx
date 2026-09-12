@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/navbar";
 import { HeroSection } from "@/components/hero-section";
-import { EventBanner } from "@/components/event-banner";
 import { AmenitiesSection } from "@/components/amenities-section";
 import { VenueSection } from "@/components/venue-section";
 import { GallerySection } from "@/components/gallery-section";
@@ -13,7 +12,6 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <HeroSection />
-        <EventBanner />
         <AmenitiesSection />
         <VenueSection />
         <GallerySection />
