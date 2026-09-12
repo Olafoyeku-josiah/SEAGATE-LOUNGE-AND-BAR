@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://seagatelounge.com';
+  const baseUrl = 'https://seagate-lounge-and-bar.vercel.app';
   
   return [
     {
